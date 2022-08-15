@@ -26,20 +26,16 @@ const csrf = require('csurf'); // csrf tokens que são criados para cada formula
 
 const { checkCsrfError, csrfMiddleware, middlewareGlobal, isLogged } = require('./src/middlewares/middleware');
 
+// Configuração do helmet para funcionamento em http 
+// não recomendado, utilizado apenas para teste no servidor
+app.use( helmet({contentSecurityPolicy: false }));
 
-app.use(helmet());
 app.use(express.json());
 app.use( express.urlencoded( { extended: true } ) );
 
 //todos os arquivos que são estaticos e que podem ser acessados diretamente
 app.use( express.static(path.resolve(__dirname, 'public')));
 
-//Configuração do MongoDB
-const store = new MongoStore({
-    mongoUrl: process.env.CONNECTIONSTRING,
-    secret: 'asdfjadsfih12311sdaa',
-    touchAfter: 24*60*60,
-});
 
 //configuração de sessões
 const sessionOptions = session({
@@ -51,7 +47,7 @@ const sessionOptions = session({
         maxAge: 1000*60*60*24*7,
         httpOnly: true
     },
-    store: store
+    store: MongoStore.create({mongoUrl: process.env.CONNECTIONSTRING})
 });
 
 app.use(sessionOptions);
