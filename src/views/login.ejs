@@ -1,0 +1,65 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/navbar.ejs')%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+
+            <div class="col-lg-8 my-5">
+                <h1 class="text-center my-3">Criar conta ou Entrar</h1>
+                <p class="text-center lead my-3">Faça login ou crie sua conta abaixo</p>
+
+                <%- include('includes/messages.ejs')%>
+                
+                <div class="row">
+                    <div class="col-sm">
+                        <h4>Faça seu Cadastro abaixo</h4>
+
+                        <form class="form-register" action="/login/register" method="POST">
+                            <input type="hidden" name="_csrf" value=<%= csrfToken %> >
+                            <div class="form-group email">
+                              <label for="email">Endereço de email</label>
+                              <input type="email" class="form-control" name="email" id="email"  placeholder="Seu email">
+                            </div>
+
+                            <div class="form-group password">
+                              <label for="password">Senha</label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="Senha">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </form>
+
+                    </div>
+    
+                    <div class="col-sm">
+                        <h4>Faça seu Login abaixo</h4>
+
+                        <form class="form-login" action="/login/login" method="POST">
+                            <input type="hidden" name="_csrf" value=<%= csrfToken %> >
+
+                            <div class="form-group email">
+                              <label for="email">Endereço de email</label>
+                              <input type="email" class="form-control" name="email" id="email"  placeholder="Seu email">
+                            </div>
+                            <div class="form-group password">
+                              <label for="password">Senha</label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="Senha">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Fazer Login</button>
+                        </form>
+
+                    </div>
+    
+                </div>
+            </div>
+            
+
+            <div class="col-lg-2">
+            </div>
+        </div>
+    </div>
+
+<%- include('includes/footer.ejs') %>
+    

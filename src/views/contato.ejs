@@ -1,0 +1,55 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/navbar.ejs')%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+
+            <div class="col-lg-8 my-5">
+                <h1 class="text-center my-3">Cadastro de Contato</h1>
+                <p class="text-center lead">Preencha os campos abaixo!</p>
+                <%- include('includes/messages.ejs')%>
+                
+                <% if( contato._id ) { %>
+                    <form class="form-contato" action='/contato/edit/<%=contato._id%>' method="POST">
+                <% } else { %>
+                    <form class="form-contato" action="/contato/cadastrar" method="POST">
+                <% } %>
+                    <input type="hidden" name="_csrf" value=<%= csrfToken %> >
+                   
+                    <% if( contato._id ) { %>
+                        <input type="hidden" name="id" value=<%=contato._id%>>
+                    <% } %>
+                    <input type="hidden" name="idUser" value=<%=user.email%>>
+
+                    <div class="form-group name">
+                      <label for="name">Nome: </label>
+                      <input type="text" value= "<%= contato.name %>" class="form-control" id="name" name="name" placeholder="Digite o primeiro nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Sobrenome: </label>
+                        <input type="text" value="<%= contato.surname %>" class="form-control" id="surname" name="surname" placeholder="Digite o Sobrenome">
+                    </div>
+                    <div class="form-group tel">
+                      <label for="tel">Contato: </label>
+                      <input type="tel" value="<%= contato.tel %>" class="form-control" id="tel" name="tel" placeholder="Digite o telefone do contato">
+                    </div>
+                    <div class="form-group email">
+                        <label for="email">Email: </label>
+                        <input type="email" value="<%= contato.email %>" class="form-control" id="email" name="email" placeholder="Digite o email do contato">
+                    </div>
+  
+  
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                  </form>
+
+            </div>
+
+            <div class="col-lg-2">
+            </div>
+        </div>
+    </div>
+
+<%- include('includes/footer.ejs') %>
+    

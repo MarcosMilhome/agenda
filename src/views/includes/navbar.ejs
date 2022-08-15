@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand" href="/">Agenda</a>
+
+
+  <div class="" id="conteudoNavbarSuportado">
+    <ul class="nav nav-pills">
+      <% if(user) {%>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="/login/logout">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/contato/index">Cadastrar Novo Contato</a>
+      </li>
+      <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="/login/index">Entrar</a>
+        </li>
+        <% } %>
+    </ul>
+  </div>
+</nav>
