@@ -34,6 +34,13 @@ app.use( express.urlencoded( { extended: true } ) );
 //todos os arquivos que são estaticos e que podem ser acessados diretamente
 app.use( express.static(path.resolve(__dirname, 'public')));
 
+//Configuração do MongoDB
+const store = new MongoStore({
+    mongoUrl: process.env.CONNECTIONSTRING,
+    secret: 'asdfjadsfih12311sdaa',
+    touchAfter: 24*60*60,
+});
+
 //configuração de sessões
 const sessionOptions = session({
     secret: 'asdfjadsfih12311sdaa',
@@ -44,7 +51,7 @@ const sessionOptions = session({
         maxAge: 1000*60*60*24*7,
         httpOnly: true
     },
-    store: MongoStore.create({mongoUrl: process.env.CONNECTIONSTRING})
+    store: store
 });
 
 app.use(sessionOptions);
